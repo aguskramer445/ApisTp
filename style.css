@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  background: #fff;
+  background: #ffffff;
   margin: 0;
   padding: 0;
 }
@@ -8,38 +8,44 @@ body {
 h1 {
   text-align: center;
   color: #e67e22;
-  font-size: 1.3em;
-  margin: 20px 0 10px 0;
+  margin-top: 20px;
+  font-size: 22px;
 }
-ul {
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 0;
-}
-li {
+
+#contenedor > div {
   display: flex;
-  align-items: center;
-  border-bottom: 1px solid #eee;
-  padding: 8px 0;
-  list-style: none;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px auto;
+  max-width: 600px;
+  background: #fff;
+  transition: transform 0.2s;
 }
-img {
-  width: 150px;
-  height: 150px;
+
+#contenedor div:hover {
+  transform: scale(1.02); 
+}
+
+#contenedor img {
+  width: 120px;
+  height: 120px;
   object-fit: contain;
   margin-right: 10px;
-  border-radius: 3px;
 }
+
 .info {
   display: flex;
   flex-direction: column;
 }
-.info span {
-  font-size: 0.98em;
-  color: #444;
-}
-.info .nombre {
+
+.nombre {
   font-weight: bold;
   color: #e67e22;
-  margin-bottom: 2px;
+  margin-bottom: 5px;
+}
+
+.info span {
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 3px;
 }

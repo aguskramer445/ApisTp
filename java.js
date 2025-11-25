@@ -1,40 +1,32 @@
-let lista = document.querySelector("#personajes-lista");
+let contenedor = document.getElementById("contenedor");
 
-function cargarPersonajes(apiUrl) {
-  lista.innerHTML = "Cargando personajes...";
+fetch("https://dragonball-api.com/api/characters")
+  .then(res => res.json())
+  .then(data => {
+    let lista = data.items;
 
-  fetch(apiUrl)
-    .then(res => res.json())
-    .then(datos => {
-      lista.innerHTML = "";
+    lista.forEach(pers => {
+      let div = document.createElement("div");
+      div.classList.add("card");
 
-      let personajes = Array.isArray(datos) ? datos : datos.items;
+      div.innerHTML = `
+        <img src="${pers.image}">
+        <div class="info">
+          <span class="nombre">${pers.name}</span>
+          <span>Ki: ${pers.ki}</span>
+          <span>Ki Máximo: ${pers.maxKi}</span>
+          <span>Raza: ${pers.race}</span>
+          <span>Género: ${pers.gender}</span>
+          <span>Afiliación: ${pers.affiliation}</span>
+          <span>Planeta de origen: ${pers.originPlanet}</span>
+          <span"><strong>Descripción:</strong> ${pers.description}</span>
+        </div>
+      `;
 
-      if (!personajes || personajes.length === 0) {
-        lista.innerHTML = "No se encontraron personajes.";
-        return;
-      }
+      contenedor.appendChild(div);
+    });
+  })
+  .catch(() => {
+    contenedor.innerHTML = "<p>Error al cargar personajes.</p>";
+  });
 
-      for (let i = 0; i < personajes.length; i++) {
-        let personaje = personajes[i];
-
-        let li = document.createElement("li");
-        let info = "";
-
-        for (let clave in personaje) {
-          if (clave === "image") continue;
-          info += `<span><strong>${clave}:</strong> ${personaje[clave]}</span>`;
-        }
-
-        li.innerHTML = `
-          <img src="${personaje.image}" alt="${personaje.name}">
-          <div class="info">
-            ${info}
-          </div>
-        `;
-      }
-    })
-
-}
-
-cargarPersonajes("https://dragonball-api.com/api/characters");
